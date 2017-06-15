@@ -1,7 +1,7 @@
 {
-  "name": "relay-runtime",
+  "name": "@alienfast/relay-runtime",
   "description": "A core runtime for building GraphQL-driven applications.",
-  "version": "1.0.0",
+  "version": "1.0.100",
   "keywords": [
     "graphql",
     "relay"
