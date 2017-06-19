@@ -1,7 +1,7 @@
 {
   "name": "@alienfast/relay-compiler",
   "description": "A compiler tool for building GraphQL-driven applications.",
-  "version": "1.0.101",
+  "version": "1.0.102",
   "keywords": [
     "graphql",
     "relay"
