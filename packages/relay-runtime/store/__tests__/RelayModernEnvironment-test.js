@@ -29,7 +29,7 @@ describe('RelayModernEnvironment', () => {
 
   beforeEach(() => {
     jest.resetModules();
-    jasmine.addMatchers(RelayModernTestUtils.matchers);
+    expect.extend(RelayModernTestUtils.matchers);
     source = new RelayInMemoryRecordSource();
     store = new RelayMarkSweepStore(source);
 
@@ -1034,7 +1034,7 @@ describe('RelayModernEnvironment', () => {
         onCompleted,
         onError,
         operation,
-        optimisticResponse: () => ({
+        optimisticResponse: {
           commentCreate: {
             comment: {
               id: commentID,
@@ -1043,7 +1043,7 @@ describe('RelayModernEnvironment', () => {
               },
             },
           },
-        }),
+        },
       });
 
       expect(onCompleted).not.toBeCalled();

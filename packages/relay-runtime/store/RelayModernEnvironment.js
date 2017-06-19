@@ -62,6 +62,11 @@ class RelayModernEnvironment implements Environment {
     this._store = config.store;
     (this: any).setNet = newNet => (this._network = newNet);
     this.unstable_internal = RelayCore;
+
+    if (__DEV__) {
+      const g = typeof global !== 'undefined' ? global : window;
+      g.__RELAY_DEBUGGER__ && g.__RELAY_DEBUGGER__.registerEnvironment(this);
+    }
   }
 
   getStore(): Store {
@@ -202,15 +207,15 @@ class RelayModernEnvironment implements Environment {
     onError?: ?(error: Error) => void,
     operation: OperationSelector,
     optimisticUpdater?: ?SelectorStoreUpdater,
-    optimisticResponse?: ?() => Object,
+    optimisticResponse?: Object,
     updater?: ?SelectorStoreUpdater,
     uploadables?: UploadableMap,
   }): Disposable {
-    let hasOptimisticUpdate = optimisticResponse || optimisticUpdater;
+    let hasOptimisticUpdate = !!optimisticResponse || optimisticUpdater;
     const optimisticUpdate = {
       operation: operation,
       selectorStoreUpdater: optimisticUpdater,
-      response: optimisticResponse ? optimisticResponse() : null,
+      response: optimisticResponse || null,
     };
     if (hasOptimisticUpdate) {
       this._publishQueue.applyUpdate(optimisticUpdate);
